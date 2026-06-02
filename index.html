@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanta Mony | Professional Graphic Designer</title>
+    <meta name="description" content="Portfolio of Shanta Mony - Professional Graphic Designer.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for UI Interactions -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: {
+                            purple: '#9333EA',
+                            blue: '#2563EB',
+                            neon: '#A855F7'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float-slow': 'floatSlow 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                        },
+                        floatSlow: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #A855F7 0%, #2563EB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-glass {
+            backdrop-filter: blur(16px);
+            background-color: rgba(15, 15, 15, 0.75);
+        }
+        .light .bg-glass {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f0f11; }
+        ::-webkit-scrollbar-thumb { background: #3b0764; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a855f7; }
+    </style>
+</head>
+<body class="bg-[#09090b] text-white transition-colors duration-300 light:bg-gray-50 light:text-zinc-900" x-data="{ darkMode: true, loading: true }" :class="{ 'dark': darkMode, 'light': !darkMode }" x-init="setTimeout(() => loading = false, 1200)">
+
+    <!-- PRELOADER ANIMATION -->
+    <div x-show="loading" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#09090b]" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div class="relative w-24 h-24 flex items-center justify-center">
+            <div class="absolute inset-0 border-4 border-purple-500/20 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-t-purple-600 rounded-full animate-spin"></div>
+        </div>
+        <h2 class="font-display text-xl mt-6 tracking-widest text-white uppercase">SHANTA MONY</h2>
+        <p class="text-xs text-zinc-500 mt-2 tracking-widest uppercase">Graphic Designer</p>
+    </div>
+
+    <!-- STICKY NAVBAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-glass border-b border-zinc-800/50 dark:border-zinc-800/50 light:border-zinc-200/50 light:bg-white/80" x-data="{ mobileOpen: false }">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="font-display text-xl font-bold tracking-wider dark:text-white light:text-zinc-900 uppercase">SHANTA MONY</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-zinc-400 dark:text-zinc-400 light:text-zinc-600">
+                <a href="#home" class="hover:text-purple-500 transition-colors">Home</a>
+                <a href="#about" class="hover:text-purple-500 transition-colors">About Me</a>
+                <a href="#services" class="hover:text-purple-500 transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-purple-500 transition-colors">Portfolio</a>
+                <a href="#process" class="hover:text-purple-500 transition-colors">Process</a>
+                <a href="#contact" class="hover:text-purple-500 transition-colors">Contact</a>
+            </div>
+
+            <!-- Configuration & Actions -->
+            <div class="hidden md:flex items-center gap-4">
+                <button @click="darkMode = !darkMode" class="p-2.5 rounded-full bg-zinc-900 dark:bg-zinc-900 light:bg-zinc-100 border border-zinc-800 dark:border-zinc-800 light:border-zinc-300 text-zinc-400 hover:text-purple-500 transition-colors">
+                    <i data-lucide="sun" x-show="darkMode" class="w-4 h-4"></i>
+                    <i data-lucide="moon" x-show="!darkMode" class="w-4 h-4"></i>
+                </button>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-white dark:bg-white dark:text-black light:bg-zinc-900 light:text-white font-medium text-sm hover:bg-purple-600 dark:hover:bg-purple-500 dark:hover:text-white transition-all transform hover:-translate-y-0.5 shadow-lg shadow-black/10">Hire Me</a>
+            </div>
+
+            <!-- Hamburger Button -->
+            <div class="flex items-center gap-4 md:hidden">
+                <button @click="darkMode = !darkMode" class="p-2 rounded-full border border-zinc-800 dark:border-zinc-800 light:border-zinc-300">
+                    <i data-lucide="sun" x-show="darkMode" class="w-4 h-4"></i>
+                    <i data-lucide="moon" x-show="!darkMode" class="w-4 h-4"></i>
+                </button>
+                <button @click="mobileOpen = !mobileOpen" class="text-zinc-400 hover:text-white">
+                    <i data-lucide="menu" x-show="!mobileOpen" class="w-6 h-6"></i>
+                    <i data-lucide="x" x-show="mobileOpen" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div x-show="mobileOpen" x-transition class="md:hidden border-b border-zinc-800 bg-[#09090b] px-6 py-6 space-y-4 absolute top-20 left-0 w-full">
+            <a href="#home" @click="mobileOpen = false" class="block text-zinc-400 py-2">Home</a>
+            <a href="#about" @click="mobileOpen = false" class="block text-zinc-400 py-2">About Me</a>
+            <a href="#services" @click="mobileOpen = false" class="block text-zinc-400 py-2">Services</a>
+            <a href="#portfolio" @click="mobileOpen = false" class="block text-zinc-400 py-2">Portfolio</a>
+            <a href="#process" @click="mobileOpen = false" class="block text-zinc-400 py-2">Process</a>
+            <a href="#contact" @click="mobileOpen = false" class="block text-zinc-400 py-2">Contact</a>
+            <a href="#contact" @click="mobileOpen = false" class="block w-full text-center py-3 bg-purple-600 rounded-xl text-white font-medium">Hire Me</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-28 overflow-hidden px-6 bg-zinc-950">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full filter blur-[120px] animate-blob"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full filter blur-[120px] animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+            <div class="lg:col-span-7 text-left space-y-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs tracking-wider uppercase text-purple-400 font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-purple-500 animate-ping"></span>
+                    Available for Freelance
+                </div>
+
+                <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tighter leading-[0.95] dark:text-white light:text-zinc-950">
+                    <span class="text-gradient block mb-2">Shanta Mony</span>
+                    <span class="text-2xl sm:text-4xl md:text-5xl font-sans font-light tracking-wide text-zinc-400 block mt-4">Graphic Designer</span>
+                </h1>
+
+                <p class="max-w-xl text-base md:text-lg text-zinc-400 dark:text-zinc-400 light:text-zinc-600 leading-relaxed">
+                    Welcome to my official platform. I am a dedicated Graphic Designer specializing in modern brand identities, creative layouts, and impactful visual storytelling. Let's make your brand look exceptional.
+                </p>
+
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#portfolio" class="bg-purple-600 hover:bg-purple-500 text-white transition px-6 py-3 rounded-2xl font-bold shadow-xl shadow-purple-600/30 text-center transform hover:-translate-y-0.5 text-sm">
+                        View Portfolio
+                    </a>
+                    <a href="https://www.behance.net/PixelCraftShanta" target="_blank" class="border border-white/10 bg-white/5 hover:border-blue-400 hover:text-blue-400 transition px-6 py-3 rounded-2xl font-semibold text-center backdrop-blur-sm transform hover:-translate-y-0.5 text-sm">
+                        View Behance
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-[380px] sm:max-w-[420px]">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-purple-600 to-blue-600 rounded-3xl transform rotate-3 scale-105 opacity-30 filter blur-sm"></div>
+                    <div class="relative bg-zinc-900 p-3 rounded-3xl border border-zinc-800 overflow-hidden shadow-2xl">
+                        <img src="images/shanta_new.png" alt="Shanta Mony" class="w-full h-[450px] object-cover rounded-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section id="about" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="relative w-full max-w-[380px]">
+                    <div class="absolute inset-0 bg-gradient-to-bl from-blue-600 to-purple-600 rounded-3xl transform -rotate-3 scale-105 opacity-20 filter blur-sm"></div>
+                    <div class="relative bg-zinc-900 p-3 rounded-3xl border border-zinc-800 overflow-hidden">
+                        <img src="images/shantamony1.png" alt="Shanta Mony Profile" class="w-full h-auto object-cover rounded-2xl">
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-6">
+                <span class="text-sm font-semibold tracking-widest uppercase text-purple-500 block">About Me</span>
+                <h2 class="font-display text-3xl md:text-5xl dark:text-white light:text-zinc-950">Shanta Mony</h2>
+                <p class="text-purple-400 font-medium text-lg">Creative Graphic Designer</p>
+                
+                <p class="text-zinc-400 text-base leading-relaxed">
+                    Based in Bangladesh, I work with global businesses and clients to deliver clean, modern, and highly effective designs. My goal is to transform your creative conceptual challenges into beautiful vector artworks and visual communication assets.
+                </p>
+
+                <div class="flex flex-wrap gap-2.5 pt-2">
+                    <span class="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-sm">Logo Design</span>
+                    <span class="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-sm">Brand Systems</span>
+                    <span class="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-sm">Social Media Graphics</span>
+                    <span class="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-sm">Print Layouts</span>
+                </div>
+
+                <div class="grid grid-cols-3 gap-6 pt-6 border-t border-zinc-900">
+                    <div>
+                        <h4 class="font-display text-3xl text-gradient">99+</h4>
+                        <p class="text-xs uppercase text-zinc-500 mt-1">Designs Delivered</p>
+                    </div>
+                    <div>
+                        <h4 class="font-display text-3xl text-gradient">50+</h4>
+                        <p class="text-xs uppercase text-zinc-500 mt-1">Happy Clients</p>
+                    </div>
+                    <div>
+                        <h4 class="font-display text-3xl text-gradient">100%</h4>
+                        <p class="text-xs uppercase text-zinc-500 mt-1">Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-32 bg-zinc-950 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-20 space-y-4">
+                <span class="text-sm font-semibold tracking-widest uppercase text-purple-500">My Specialities</span>
+                <h2 class="font-display text-3xl md:text-5xl">Design Services</h2>
+                <p class="text-zinc-400">High-quality visual production tailored to fit your specific corporate demands.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-purple-500/50 transition-all group shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 mb-6">
+                        <i data-lucide="pen-tool" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl mb-3">Logo Design</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">Unique identity vector symbols that represent your business values beautifully.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 transition-all group shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 mb-6">
+                        <i data-lucide="award" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl mb-3">Brand Identity</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">Cohesive style packages, select corporate typography templates, and layout standards.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-purple-500/50 transition-all group shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 mb-6">
+                        <i data-lucide="layout" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl mb-3">Social Media Assets</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">Engaging social media post structures and banner frameworks optimized for Facebook and Instagram grids.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="space-y-4 mb-16">
+            <span class="text-sm font-semibold tracking-widest uppercase text-purple-500">Showcase</span>
+            <h2 class="font-display text-3xl md:text-5xl">Recent Works Portfolio</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <a href="https://www.behance.net/gallery/248858129/SYNORA" target="_blank" class="group relative overflow-hidden rounded-[30px] border border-white/5 bg-white block transform hover:-translate-y-1 transition duration-300 shadow-xl">
+              <div class="w-full h-[320px] p-8 flex items-center justify-center bg-white overflow-hidden">
+                <img src="images/synora Logo.jpg" alt="Synora Logo" class="max-w-full max-h-full object-contain group-hover:scale-105 transition duration-500" />
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
+              <div class="absolute top-4 right-4 bg-gray-950/80 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-blue-400 font-semibold opacity-0 group-hover:opacity-100 transition duration-300 backdrop-blur-sm">View Project ↗</div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2 py-1 rounded-md mb-2 inline-block">Tech & IT Agency</span>
+                <h3 class="text-xl font-bold mb-1 group-hover:text-purple-400 transition text-white">Synora Identity</h3>
+                <p class="text-gray-300 text-xs">A clean, tech-forward isometric brand mark rendering structural pixel flow.</p>
+              </div>
+            </a>
+
+            <!-- Project 2 -->
+            <a href="https://www.behance.net/gallery/249223869/Doctors-Care" target="_blank" class="group relative overflow-hidden rounded-[30px] border border-white/5 bg-white block transform hover:-translate-y-1 transition duration-300 shadow-xl">
+              <div class="w-full h-[320px] p-8 flex items-center justify-center bg-white overflow-hidden">
+                <img src="images/DoctorsCare.jpg" alt="Doctors Care" class="max-w-full max-h-full object-contain group-hover:scale-105 transition duration-500" />
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
+              <div class="absolute top-4 right-4 bg-gray-950/80 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-blue-400 font-semibold opacity-0 group-hover:opacity-100 transition duration-300 backdrop-blur-sm">View Project ↗</div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-md mb-2 inline-block">Medical & Clinical</span>
+                <h3 class="text-xl font-bold mb-1 group-hover:text-purple-400 transition text-white">Doctors Care</h3>
+                <p class="text-gray-300 text-xs">A holistic stethoscope layout combined with safety symbols, conveying care.</p>
+              </div>
+            </a>
+
+            <!-- Project 3 -->
+            <a href="https://www.behance.net/gallery/250051791/Travelo" target="_blank" class="group relative overflow-hidden rounded-[30px] border border-white/5 bg-white block transform hover:-translate-y-1 transition duration-300 shadow-xl">
+              <div class="w-full h-[320px] p-8 flex items-center justify-center bg-white overflow-hidden">
+                <img src="images/Travelo.png" alt="Travelo" class="max-w-full max-h-full object-contain group-hover:scale-105 transition duration-500" />
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
+              <div class="absolute top-4 right-4 bg-gray-950/80 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-blue-400 font-semibold opacity-0 group-hover:opacity-100 transition duration-300 backdrop-blur-sm">View Project ↗</div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded-md mb-2 inline-block">Tourism & Leisure</span>
+                <h3 class="text-xl font-bold mb-1 group-hover:text-purple-400 transition text-white">Travelo Ventures</h3>
+                <p class="text-gray-300 text-xs">A multi-layered design incorporating elements of global navigation paths.</p>
+              </div>
+            </a>
+
+            <!-- Project 4 -->
+            <a href="https://www.behance.net/gallery/248857005/Sweet-Slice" target="_blank" class="group relative overflow-hidden rounded-[30px] border border-white/5 bg-white block transform hover:-translate-y-1 transition duration-300 shadow-xl">
+              <div class="w-full h-[320px] p-8 flex items-center justify-center bg-white overflow-hidden">
+                <img src="images/sweetslice.png" alt="Sweet Slice" class="max-w-full max-h-full object-contain group-hover:scale-105 transition duration-500" />
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
+              <div class="absolute top-4 right-4 bg-gray-950/80 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-blue-400 font-semibold opacity-0 group-hover:opacity-100 transition duration-300 backdrop-blur-sm">View Project ↗</div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-orange-400 bg-orange-500/10 px-2 py-1 rounded-md mb-2 inline-block">Bakery & Confectionery</span>
+                <h3 class="text-xl font-bold mb-1 group-hover:text-purple-400 transition text-white">Sweet Slice Patisserie</h3>
+                <p class="text-gray-300 text-xs">A gourmet emblem showcasing premium multi-tiered pastry layers.</p>
+              </div>
+            </a>
+
+            <!-- Project 5 -->
+            <a href="https://www.behance.net/gallery/249235125/HIJAB" target="_blank" class="group relative overflow-hidden rounded-[30px] border border-white/5 bg-white block transform hover:-translate-y-1 transition duration-300 shadow-xl">
+              <div class="w-full h-[320px] p-8 flex items-center justify-center bg-white overflow-hidden">
+                <img src="images/Hijab.jpg" alt="Hijab Modest" class="max-w-full max-h-full object-contain group-hover:scale-105 transition duration-500" />
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
+              <div class="absolute top-4 right-4 bg-gray-950/80 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-blue-400 font-semibold opacity-0 group-hover:opacity-100 transition duration-300 backdrop-blur-sm">View Project ↗</div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-pink-400 bg-pink-500/10 px-2 py-1 rounded-md mb-2 inline-block">Apparel & Fashion</span>
+                <h3 class="text-xl font-bold mb-1 group-hover:text-purple-400 transition text-white">Hijab Modest Line</h3>
+                <p class="text-gray-300 text-xs">An exquisite, fine-line dynamic silhouette drawing representing minimalist fashion.</p>
+              </div>
+            </a>
+
+            <!-- Project 6 -->
+            <a href="https://www.behance.net/gallery/249967057/Euro-Heaven" target="_blank" class="group relative overflow-hidden rounded-[30px] border border-white/5 bg-white block transform hover:-translate-y-1 transition duration-300 shadow-xl">
+              <div class="w-full h-[320px] p-8 flex items-center justify-center bg-white overflow-hidden">
+                <img src="images/EuroHeaven.jpg" alt="Euro Heaven" class="max-w-full max-h-full object-contain group-hover:scale-105 transition duration-500" />
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
+              <div class="absolute top-4 right-4 bg-gray-950/80 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-blue-400 font-semibold opacity-0 group-hover:opacity-100 transition duration-300 backdrop-blur-sm">View Project ↗</div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-purple-400 bg-purple-500/10 px-2 py-1 rounded-md mb-2 inline-block">Retail & Commerce</span>
+                <h3 class="text-xl font-bold mb-1 group-hover:text-purple-400 transition text-white">Euro Heaven Supershop</h3>
+                <p class="text-gray-300 text-xs">A solid, stately circular crest layout providing immediate brand recognition.</p>
+              </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section id="process" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-20 space-y-4">
+            <span class="text-sm font-semibold tracking-widest uppercase text-purple-500">Methodology</span>
+            <h2 class="font-display text-3xl md:text-5xl">My Design Process</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+                <div class="text-3xl font-display font-bold text-purple-500 mb-4">01</div>
+                <h4 class="font-bold text-lg mb-2">Understand</h4>
+                <p class="text-xs text-zinc-400 leading-relaxed">Listening to your exact brand ideas and identifying structural goals.</p>
+            </div>
+            <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+                <div class="text-3xl font-display font-bold text-blue-500 mb-4">02</div>
+                <h4 class="font-bold text-lg mb-2">Sketching</h4>
+                <p class="text-xs text-zinc-400 leading-relaxed">Developing original visual concepts and layout variations.</p>
+            </div>
+            <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+                <div class="text-3xl font-display font-bold text-purple-500 mb-4">03</div>
+                <h4 class="font-bold text-lg mb-2">Execution</h4>
+                <p class="text-xs text-zinc-400 leading-relaxed">Creating clean vectors in vector software with ultimate precision.</p>
+            </div>
+            <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl">
+                <div class="text-3xl font-display font-bold text-blue-500 mb-4">04</div>
+                <h4 class="font-bold text-lg mb-2">Delivery</h4>
+                <p class="text-xs text-zinc-400 leading-relaxed">Providing final high definition vector source assets safely.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FACEBOOK SECTION (Moved under Process Section) -->
+    <section id="facebook-section" class="py-24 bg-zinc-950 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-900/30 via-zinc-900 to-zinc-900 border border-zinc-800 p-8 md:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="space-y-4 max-w-xl text-center md:text-left">
+                    <span class="text-xs font-semibold tracking-widest uppercase text-blue-500 block">Social Network Integration</span>
+                    <h3 class="font-display text-2xl md:text-3xl text-white">Connect with me on Facebook</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Stay updated with my latest work, graphic design tips, and recent updates. Feel free to join my community or message me directly through Facebook.
+                    </p>
+                </div>
+
+                <div class="w-full md:w-auto text-center">
+                    <a href="https://www.facebook.com/share/18nJTchtxh/" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-[#1877F2] text-white font-medium rounded-xl hover:bg-blue-600 transition-all shadow-lg w-full sm:w-auto justify-center">
+                        <i data-lucide="facebook" class="w-5 h-5 fill-white"></i>
+                        Visit Facebook Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="px-6 py-24 relative">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] -z-10"></div>
+        
+        <div class="max-w-5xl mx-auto bg-white/[0.01] border border-white/5 rounded-[36px] p-8 md:p-16 shadow-2xl backdrop-blur-md">
+          <div class="text-center mb-14">
+            <span class="text-xs font-bold uppercase tracking-[6px] text-purple-400 bg-purple-500/10 px-4 py-2 rounded-full inline-block mb-4">Get In Touch</span>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Let’s Work Together</h2>
+            <p class="text-gray-400 max-w-xl mx-auto leading-relaxed text-sm">
+              Need a dedicated graphic designer to scale your brand? Drop a message below or reach out via social profiles.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-5 gap-12 items-start">
+            <div class="md:col-span-2 space-y-4 text-left">
+              <div class="bg-white/[0.02] border border-white/5 p-5 rounded-2xl group hover:border-purple-500/20 transition">
+                <p class="text-[10px] uppercase text-purple-400 font-bold tracking-wider mb-1">Call / WhatsApp</p>
+                <a href="tel:_8801708054975" class="text-base font-semibold hover:text-blue-400 transition block mt-0.5">+880 1708-054975</a>
+              </div>
+              
+              <div class="bg-white/[0.02] border border-white/5 p-5 rounded-2xl group hover:border-blue-500/20 transition">
+                <p class="text-[10px] uppercase text-blue-400 font-bold tracking-wider mb-1">Email Us</p>
+                <a href="mailto:pixelcraftshanta@gmail.com" class="text-base font-semibold hover:text-purple-400 transition break-all block mt-0.5">pixelcraftshanta@gmail.com</a>
+              </div>
+
+              <div class="bg-white/[0.02] border border-white/5 p-5 rounded-2xl group hover:border-purple-500/20 transition">
+                <p class="text-[10px] uppercase text-purple-400 font-bold tracking-wider mb-1">Facebook Community</p>
+                <a href="https://www.facebook.com/share/18nJTchtxh/" target="_blank" class="text-base font-semibold hover:text-blue-400 transition block mt-0.5">Pixel Craft</a>
+              </div>
+
+              <div class="bg-white/[0.02] border border-white/5 p-5 rounded-2xl group hover:border-blue-500/20 transition">
+                <p class="text-[10px] uppercase text-blue-400 font-bold tracking-wider mb-1">LinkedIn Network</p>
+                <a href="https://www.linkedin.com/in/shanta-mony-2674b121b/" target="_blank" class="text-base font-semibold hover:text-purple-400 transition block mt-0.5">Shanta Mony</a>
+              </div>
+            </div>
+
+            <!-- Form -->
+            <div class="md:col-span-3 bg-white/[0.02] border border-white/5 p-8 rounded-3xl space-y-5">
+              <h3 class="text-xl font-bold text-white mb-2">Send a Direct Message</h3>
+              <form action="#" method="POST" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Your Name</label>
+                    <input type="text" placeholder="John Doe" required class="w-full bg-[#030014] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Email Address</label>
+                    <input type="email" placeholder="john@example.com" required class="w-full bg-[#030014] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Project Message</label>
+                  <textarea rows="4" placeholder="Describe your project goals..." required class="w-full bg-[#030014] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-sm transition tracking-wide">Send Message ✨</button>
+              </form>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#02000a] border-t border-white/10 pt-16 pb-8 px-6 md:px-16 lg:px-24 text-gray-400">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12 text-left">
+        <!-- Footer Column 1: Brand Info -->
+        <div class="space-y-4">
+            <div class="flex items-center gap-3">
+            <img src="images/updatelogo.png" alt="Shanta Mony Logo" class="h-8 w-auto object-contain" onerror="this.style.display='none'">
+            <span class="text-lg font-bold tracking-wide text-white uppercase">
+                Shanta <span class="text-blue-500">Mony</span>
+            </span>
+            </div>
+            <p class="text-sm text-gray-400 leading-relaxed max-w-sm">
+            Bridging the gap between creative concepts and powerful digital assets. Crafting premium visual experiences, dynamic identities, and strategic brand systems globally.
+            </p>
+        </div>
+
+        <!-- Footer Column 2: Quick Navigation -->
+        <div class="space-y-4">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-white">Quick Exploration</h4>
+            <div class="grid grid-cols-2 gap-2 text-sm">
+            <a href="#home" class="hover:text-purple-400 transition">Home Base</a>
+            <a href="#services" class="hover:text-purple-400 transition">Core Services</a>
+            <a href="#portfolio" class="hover:text-purple-400 transition">Case Studies</a>
+            <a href="#process" class="hover:text-purple-400 transition">My Process</a>
+            <a href="#about" class="hover:text-purple-400 transition">About Me</a>
+            <a href="#contact" class="hover:text-purple-400 transition">Get In Touch</a>
+            </div>
+        </div>
+
+        <!-- Footer Column 3: Contact Details Hub -->
+        <div class="space-y-4">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-white">Direct Channels</h4>
+            <div class="space-y-2 text-sm">
+            <p class="flex items-center gap-2">
+                <span class="text-purple-400 font-semibold">WhatsApp:</span> 
+                <a href="tel:_8801708054975" class="hover:text-blue-400 transition">+880 1708-054975</a>
+            </p>
+            <p class="flex items-center gap-2">
+                <span class="text-blue-400 font-semibold">Email:</span> 
+                <a href="mailto:pixelcraftshanta@gmail.com" class="hover:text-purple-400 transition break-all">pixelcraftshanta@gmail.com</a>
+            </p>
+            <p class="flex items-center gap-2">
+                <span class="text-purple-400 font-semibold">Location:</span> 
+                <span class="text-gray-300">Dhaka, Bangladesh</span>
+            </p>
+            </div>
+        </div>
+        </div>
+
+        <!-- Bottom Copyright Note -->
+        <div class="max-w-6xl mx-auto pt-8 border-t border-white/5 text-center text-xs text-gray-500">
+        © 2026 <strong class="text-gray-400 font-semibold">Shanta Mony</strong>. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
